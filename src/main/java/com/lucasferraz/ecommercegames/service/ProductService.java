@@ -1,18 +1,22 @@
 package com.lucasferraz.ecommercegames.service;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 
 import com.lucasferraz.ecommercegames.DTO.ProductDTO;
 import com.lucasferraz.ecommercegames.entity.Product;
 import com.lucasferraz.ecommercegames.repository.ProductRepository;
+import com.lucasferraz.ecommercegames.service.exceptions.DataBaseException;
 import com.lucasferraz.ecommercegames.service.exceptions.ResourceNotFoundException;
 
 @Service
@@ -21,9 +25,9 @@ public class ProductService {
 	private ProductRepository repository;
 	
 	@Transactional(readOnly = true)
-	public  List<ProductDTO> findAll(){
-		List<Product> list = repository.findAll();
-		return list.stream().map(x -> new ProductDTO(x)).collect(Collectors.toList());
+	public  Page<ProductDTO> findAllPaged(PageRequest pageRequest){
+		Page<Product> list = repository.findAll(pageRequest);
+		return list.map(x -> new ProductDTO(x));
 	}
 
 	@Transactional(readOnly = true)
@@ -59,4 +63,17 @@ public class ProductService {
 		}
 	}
 
+	
+	public void delete(Long id) {
+		try {
+			repository.deleteById(id);
+		}catch(EmptyResultDataAccessException e) {
+			throw new ResourceNotFoundException("Id não encontrado" + id);
+		}catch(DataIntegrityViolationException e) {
+			throw new DataBaseException("Violação de integridade");
+		}
+	}
+
+	
+	
 }
