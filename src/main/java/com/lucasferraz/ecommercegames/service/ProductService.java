@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.lucasferraz.ecommercegames.DTO.ProductDTO;
 import com.lucasferraz.ecommercegames.entity.Product;
 import com.lucasferraz.ecommercegames.repository.ProductRepository;
-import com.lucasferraz.ecommercegames.service.exceptions.EntityNotFoundException;
+import com.lucasferraz.ecommercegames.service.exceptions.ResourceNotFoundException;
 
 @Service
 public class ProductService {
@@ -27,7 +29,7 @@ public class ProductService {
 	@Transactional(readOnly = true)
 	public ProductDTO findById(Long id) {
 		Optional<Product> obj = repository.findById(id);
-		Product entity = obj.orElseThrow(() -> new EntityNotFoundException("Entidade não encontrada"));
+		Product entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entidade não encontrada"));
 		return new ProductDTO(entity);	
 	}
 
@@ -40,6 +42,21 @@ public class ProductService {
 		entity.setImage(dto.getImage());
 		entity = repository.save(entity);
 		return new ProductDTO(entity);
+	}
+	
+	@Transactional
+	public ProductDTO update(Long id, ProductDTO dto) {
+		try {
+			Product entity = repository.getOne(id);
+			entity.setName(dto.getName());
+			entity.setPrice(dto.getPrice());
+			entity.setScore(dto.getScore());
+			entity.setImage(dto.getImage());
+			entity = repository.save(entity);
+			return new ProductDTO(entity);
+		}catch(EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id não encontrado" + id);
+		}
 	}
 
 }
