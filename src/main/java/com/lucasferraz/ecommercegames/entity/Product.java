@@ -30,7 +30,7 @@ public class Product implements Serializable{
 	public Product() {
 	}
 
-	public Product(long id, String name, BigDecimal price, short score, String image) {
+	public Product(Long id, String name, BigDecimal price, short score, String image) {
 		this.id = id;
 		this.name = name;
 		this.price = price;
@@ -38,11 +38,11 @@ public class Product implements Serializable{
 		this.image = image;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
