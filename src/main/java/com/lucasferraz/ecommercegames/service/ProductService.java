@@ -1,6 +1,7 @@
 package com.lucasferraz.ecommercegames.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.lucasferraz.ecommercegames.DTO.ProductDTO;
 import com.lucasferraz.ecommercegames.entity.Product;
 import com.lucasferraz.ecommercegames.repository.ProductRepository;
+import com.lucasferraz.ecommercegames.service.exceptions.EntityNotFoundException;
 
 @Service
 public class ProductService {
@@ -20,6 +22,13 @@ public class ProductService {
 	public  List<ProductDTO> findAll(){
 		List<Product> list = repository.findAll();
 		return list.stream().map(x -> new ProductDTO(x)).collect(Collectors.toList());
+	}
+
+	@Transactional(readOnly = true)
+	public ProductDTO findById(Long id) {
+		Optional<Product> obj = repository.findById(id);
+		Product entity = obj.orElseThrow(() -> new EntityNotFoundException("Entidade não encontrada"));
+		return new ProductDTO(entity);	
 	}
 
 }
