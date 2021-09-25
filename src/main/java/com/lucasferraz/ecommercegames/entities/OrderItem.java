@@ -6,7 +6,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_orderItem")
@@ -17,13 +21,26 @@ public class OrderItem implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private Integer quantity;
+	private Double price;
+	
+	@ManyToOne
+	@JoinColumn(name = "product_id")
+	private Product product;
+
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "order_id")
+	private Order order;
 	
 	public OrderItem() {
 	}
-
-	public OrderItem(Long id, Integer quantity) {
+	
+	public OrderItem(Long id, Integer quantity, Double price, Product product, Order order) {
 		this.id = id;
 		this.quantity = quantity;
+		this.price = price;
+		this.product = product;
+		this.order = order;
 	}
 
 	public Long getId() {
@@ -42,6 +59,32 @@ public class OrderItem implements Serializable{
 		this.quantity = quantity;
 	}
 	
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
 	
+	public Double getSubTotal() {
+		return quantity * price;
+	}
 
 }
