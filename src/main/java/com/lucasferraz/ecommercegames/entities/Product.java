@@ -1,4 +1,4 @@
-package com.lucasferraz.ecommercegames.entity;
+package com.lucasferraz.ecommercegames.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

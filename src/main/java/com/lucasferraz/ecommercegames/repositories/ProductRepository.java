@@ -1,8 +1,8 @@
-package com.lucasferraz.ecommercegames.repository;
+package com.lucasferraz.ecommercegames.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.lucasferraz.ecommercegames.entity.Product;
+import com.lucasferraz.ecommercegames.entities.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Long>{
 

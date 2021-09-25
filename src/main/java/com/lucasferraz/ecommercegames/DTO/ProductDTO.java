@@ -3,7 +3,7 @@ package com.lucasferraz.ecommercegames.DTO;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-import com.lucasferraz.ecommercegames.entity.Product;
+import com.lucasferraz.ecommercegames.entities.Product;
 
 public class ProductDTO implements Serializable{
 	private static final long serialVersionUID = 1L;

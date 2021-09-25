@@ -9,8 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.lucasferraz.ecommercegames.service.exceptions.DataBaseException;
-import com.lucasferraz.ecommercegames.service.exceptions.ResourceNotFoundException;
+import com.lucasferraz.ecommercegames.services.exceptions.DataBaseException;
+import com.lucasferraz.ecommercegames.services.exceptions.ResourceNotFoundException;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {

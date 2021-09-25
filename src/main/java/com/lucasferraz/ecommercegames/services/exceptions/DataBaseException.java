@@ -1,4 +1,4 @@
-package com.lucasferraz.ecommercegames.service.exceptions;
+package com.lucasferraz.ecommercegames.services.exceptions;
 
 public class DataBaseException extends RuntimeException{
 	private static final long serialVersionUID = 1L;

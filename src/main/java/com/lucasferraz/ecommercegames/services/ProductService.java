@@ -1,4 +1,4 @@
-package com.lucasferraz.ecommercegames.service;
+package com.lucasferraz.ecommercegames.services;
 
 import java.util.Optional;
 
@@ -14,10 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import com.lucasferraz.ecommercegames.DTO.ProductDTO;
-import com.lucasferraz.ecommercegames.entity.Product;
-import com.lucasferraz.ecommercegames.repository.ProductRepository;
-import com.lucasferraz.ecommercegames.service.exceptions.DataBaseException;
-import com.lucasferraz.ecommercegames.service.exceptions.ResourceNotFoundException;
+import com.lucasferraz.ecommercegames.entities.Product;
+import com.lucasferraz.ecommercegames.repositories.ProductRepository;
+import com.lucasferraz.ecommercegames.services.exceptions.DataBaseException;
+import com.lucasferraz.ecommercegames.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class ProductService {

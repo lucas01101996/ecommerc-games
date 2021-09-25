@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.lucasferraz.ecommercegames.DTO.ProductDTO;
-import com.lucasferraz.ecommercegames.service.ProductService;
+import com.lucasferraz.ecommercegames.services.ProductService;
 
 @RestController
 @RequestMapping(value = "/products")
