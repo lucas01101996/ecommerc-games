@@ -10,14 +10,14 @@ public class ProductDTO implements Serializable{
 	
 	public Long id;
 	public String name;
-	public BigDecimal price;
+	public Double price;
 	public short score;
 	public String image;
 	
 	public ProductDTO() {
 	}
 
-	public ProductDTO(Long id, String name, BigDecimal price, short score, String image) {
+	public ProductDTO(Long id, String name, Double price, short score, String image) {
 		this.id = id;
 		this.name = name;
 		this.price = price;
@@ -49,11 +49,11 @@ public class ProductDTO implements Serializable{
 		this.name = name;
 	}
 
-	public BigDecimal getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(BigDecimal price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
@@ -72,8 +72,5 @@ public class ProductDTO implements Serializable{
 	public void setImage(String image) {
 		this.image = image;
 	}
-	
-	
-	
 	
 }

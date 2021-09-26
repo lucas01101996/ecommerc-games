@@ -9,3 +9,9 @@ INSERT INTO tb_product (name, price, score, image) VALUES ('FIFA 22', 195.39, 32
 INSERT INTO tb_product (name, price, score, image) VALUES ('Horizon Zero Dawn', 115.8, 290, 'horizon-zero-dawn.png');
 INSERT INTO tb_product (name, price, score, image) VALUES ('NBA 2k22', 300.00, 300, 'nbk2k22.png');
 
+
+
+INSERT INTO tb_order (price, quantity) VALUES (0, 20);
+
+INSERT INTO tb_order_product (order_id, product_id) VALUES (1,1);
+INSERT INTO tb_order_product (order_id, product_id) VALUES (1,1);
