@@ -3,7 +3,6 @@ package com.lucasferraz.ecommercegames.DTO;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import com.lucasferraz.ecommercegames.entities.Order;
 import com.lucasferraz.ecommercegames.entities.Product;
@@ -74,7 +73,6 @@ public class OrderDTO implements Serializable {
 	public double getSubTotal() {
 		double sum = 0.00;
 		
-		
 		for (ProductDTO productDTO : products) {
 			sum += productDTO.price;
 		}
@@ -82,19 +80,17 @@ public class OrderDTO implements Serializable {
 		return sum;
 	}
 	
-	public double getTotal() {
+	public double getTotal() {//tratar isso aqui e ver uma maneira mais dinamica
 		double sum = 0.00;
-		double frete = 10.00;//tem que ser uma constante
+		final double freight = 10.00;
 		
 		for (ProductDTO productDTO : products) {
 			if(productDTO.price < 250) {
-				sum += productDTO.price + frete;
+				sum += productDTO.price + freight;
 			}else {
 				sum += productDTO.price; 
 			}
 		}
-		
-	 
 		return sum;
 	}
 	

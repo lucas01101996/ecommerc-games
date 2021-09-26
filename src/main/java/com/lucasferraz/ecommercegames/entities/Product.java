@@ -21,7 +21,7 @@ public class Product implements Serializable{
 
 	public String name;
 
-	public Double price;//bidDecimal
+	public Double price;//bigDecimal
 
 	public short score;
 
