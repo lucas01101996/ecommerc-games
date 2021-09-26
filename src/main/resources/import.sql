@@ -14,4 +14,5 @@ INSERT INTO tb_product (name, price, score, image) VALUES ('NBA 2k22', 300.00, 3
 INSERT INTO tb_order (price, quantity) VALUES (0, 20);
 
 INSERT INTO tb_order_product (order_id, product_id) VALUES (1,1);
-INSERT INTO tb_order_product (order_id, product_id) VALUES (1,1);
+INSERT INTO tb_order_product (order_id, product_id) VALUES (1,2);
+INSERT INTO tb_order_product (order_id, product_id) VALUES (1,2);

@@ -29,6 +29,8 @@ public class OrderDTO implements Serializable {
 
 	public OrderDTO(Order entity) {
 		this.id = entity.getId();
+		this.price = entity.getPrice();
+		this.quantity = entity.getQuantity();
 	}
 	
 	public OrderDTO(Order entity, List<Product> products) {
@@ -72,6 +74,7 @@ public class OrderDTO implements Serializable {
 	public double getSubTotal() {
 		double sum = 0.00;
 		
+		
 		for (ProductDTO productDTO : products) {
 			sum += productDTO.price;
 		}
@@ -79,13 +82,21 @@ public class OrderDTO implements Serializable {
 		return sum;
 	}
 	
-	/*public double getTotal() {
+	public double getTotal() {
 		double sum = 0.00;
-		for (ProductDTO product : products) {
-			sum += 
+		double frete = 10.00;//tem que ser uma constante
+		
+		for (ProductDTO productDTO : products) {
+			if(productDTO.price < 250) {
+				sum += productDTO.price + frete;
+			}else {
+				sum += productDTO.price; 
+			}
 		}
+		
+	 
 		return sum;
-	}*/
+	}
 	
 	
 	
