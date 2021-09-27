@@ -1,7 +1,6 @@
 package com.lucasferraz.ecommercegames.DTO;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 import com.lucasferraz.ecommercegames.entities.Product;
 

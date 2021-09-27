@@ -13,8 +13,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lucasferraz.ecommercegames.DTO.OrderDTO;
+import com.lucasferraz.ecommercegames.DTO.ProductDTO;
 import com.lucasferraz.ecommercegames.entities.Order;
+import com.lucasferraz.ecommercegames.entities.Product;
 import com.lucasferraz.ecommercegames.repositories.OrderRepository;
+import com.lucasferraz.ecommercegames.repositories.ProductRepository;
 import com.lucasferraz.ecommercegames.services.exceptions.DataBaseException;
 import com.lucasferraz.ecommercegames.services.exceptions.ResourceNotFoundException;
 
@@ -23,6 +26,9 @@ public class OrderService {
 	
 	@Autowired
 	private OrderRepository repository;
+	
+	@Autowired
+	private ProductRepository productRepository;
 	
 
 	@Transactional(readOnly = true)
@@ -41,8 +47,7 @@ public class OrderService {
 	@Transactional
 	public OrderDTO insert(OrderDTO dto) {
 		Order entity = new Order();
-		entity.setPrice(dto.getPrice());
-		entity.setQuantity(dto.getQuantity());
+		copyOrderDtoToEntity(dto, entity);
 		entity = repository.save(entity);
 		return new OrderDTO(entity);
 	}
@@ -51,8 +56,7 @@ public class OrderService {
 	public OrderDTO update(Long id, OrderDTO dto) {
 		try {
 			Order entity = repository.getOne(id);
-			entity.setPrice(dto.getPrice());
-			entity.setQuantity(dto.getQuantity());
+			copyOrderDtoToEntity(dto, entity);
 			entity = repository.save(entity);
 			return new OrderDTO(entity);
 		}catch(EntityNotFoundException e) {
@@ -69,6 +73,19 @@ public class OrderService {
 		}catch(DataIntegrityViolationException e) {
 			throw new DataBaseException("Violação de integridade");
 		}
+	}
+	
+	//metodo para copiar os atributos do dto para as entidades
+	private void copyOrderDtoToEntity(OrderDTO dto, Order entity) {
+		entity.setPrice(dto.getPrice());
+		entity.setQuantity(dto.getQuantity());
+		
+		entity.getProducts().clear();
+		for(ProductDTO prodDTO : dto.getProducts()) {
+			Product product = productRepository.getOne(prodDTO.getId());
+			entity.getProducts().add(product);
+		}
+		
 	}
 
 

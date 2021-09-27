@@ -10,6 +10,7 @@ import com.lucasferraz.ecommercegames.entities.Product;
 
 public class OrderDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private double freight = 10.00;
 	
 	private Long id;
 	private Double price;
@@ -70,7 +71,7 @@ public class OrderDTO implements Serializable {
 		return products;
 	}
 	
-	public double getSubTotal() {
+	public double getSubTotal() {//resolver essa repetição de codigo
 		double sum = 0.00;
 		
 		for (ProductDTO productDTO : products) {
@@ -80,21 +81,33 @@ public class OrderDTO implements Serializable {
 		return sum;
 	}
 	
-	public double getTotal() {//tratar isso aqui e ver uma maneira mais dinamica
+	public double getTotal() {
 		double sum = 0.00;
-		final double freight = 10.00;
-		
+		double i = 0;
 		for (ProductDTO productDTO : products) {
-			if(productDTO.price < 250) {
 				sum += productDTO.price + freight;
-			}else {
-				sum += productDTO.price; 
-			}
+				i++;
 		}
+		if(sum>=250) {
+			sum -= freight * i;
+		}
+			
 		return sum;
 	}
 	
-	
-	
+	public double getFreteTotal() {
+		double sum = 0.00;
+		double i = 0;
+		for (ProductDTO productDTO : products) {
+				sum += productDTO.price + freight;
+				i++;
+		}
+		if(sum>=250) {
+			sum -= freight * i;
+			freight = 0.0;
+		}
+		
+		return i * freight;
+	}
 	
 }
