@@ -2,7 +2,7 @@
 
 # Sobre o projeto
 
-É uma projeto de uma Api de ecommerce de games.
+É um projeto de uma Api de ecommerce de games.
 
 # Tecnologias utilizadas
 ## Back end
